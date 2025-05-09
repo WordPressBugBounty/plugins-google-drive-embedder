@@ -1,138 +1,222 @@
-# Copyright (C) 2016 
-# This file is distributed under the same license as the  package.
+# Copyright (C) 2025 WP Glogin Team
+# This file is distributed under the same license as the Google Drive Embedder plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version:  \n"
-"Report-Msgid-Bugs-To: http://wordpress.org/tag/googledrivemedia\n"
-"POT-Creation-Date: 2016-11-08 14:48:44+00:00\n"
+"Project-Id-Version: Google Drive Embedder 5.3.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/google-drive-embedder\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"POT-Creation-Date: 2025-05-09T14:20:30+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: google-drive-embedder\n"
 
-#: core/EDD_SL_Plugin_Updater.php:248
-msgid "There is a new version of %1$s available. <a target=\"_blank\" class=\"thickbox\" href=\"%2$s\">View version %3$s details</a>."
-msgstr ""
-
-#: core/EDD_SL_Plugin_Updater.php:255
-msgid "There is a new version of %1$s available. <a target=\"_blank\" class=\"thickbox\" href=\"%2$s\">View version %3$s details</a> or <a href=\"%4$s\">update now</a>."
-msgstr ""
-
-#: core/EDD_SL_Plugin_Updater.php:490
-msgid "You do not have permission to install plugin updates"
-msgstr ""
-
-#: core/EDD_SL_Plugin_Updater.php:490
-msgid "Error"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:108
-msgid "Loading..."
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:109
-msgid "More..."
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:110
-msgid "Fetching files..."
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:111
-msgid "Click to authorize Google Drive"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:112
-msgid "Go Back"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:113
-msgid "Open"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:114
-msgid "Download"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:115
-msgid "Upload"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:116
-msgid "Problem contacting the web server"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:117
-#: core/commercial_google_drive_embedder.php:118
-msgid "You do not have permissions to view this controlled folder"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:119
-msgid "Error uploading"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:120
-msgid "Finished"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:121
-msgid "Uploading"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:122
-msgid "Drive Attachments"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:123
-msgid "There are no files for you to view. You may need to ask the folder/file owner to share the files with you in Google Drive."
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:124
-msgid "There was an error"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:125
-msgid "No items were returned"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:126
-msgid "Title"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:127
-msgid "Owner"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:128
-msgid "Last Modified"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:129
-msgid "Last Access by Me"
-msgstr ""
-
-#: core/commercial_google_drive_embedder.php:130
-msgid "Size"
-msgstr ""
-
-# wordpress plugin description
-msgid "Browse for Google Drive documents and embed directly in your posts/pages. Extends Google Apps Login plugin so no extra user auth required."
-msgstr ""
-
-# readme description
-msgid "Easily browse for Google Drive documents and embed directly in your posts and pages. Extends the popular Google Apps Login plugin so no extra user authentication (or admin setup) is required."
-msgstr ""
-
-# wordpress plugin description
+#. Plugin Name of the plugin
+#: google_drive_embedder.php
+#: core/core_google_drive_embedder.php:392
+#: core/core_google_drive_embedder.php:393
+#: core/core_google_drive_embedder.php:400
+#: core/core_google_drive_embedder.php:401
+#: core/core_google_drive_embedder.php:420
 msgid "Google Drive Embedder"
 msgstr ""
 
-# wordpress plugin description
-msgid "Google Drive Embedder Premium"
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+#: google_drive_embedder.php
+msgid "https://wp-glogin.com/"
 msgstr ""
 
-# wordpress plugin description
-msgid "Google Drive Embedder Enterprise"
+#. Description of the plugin
+#: google_drive_embedder.php
+msgid "Easily browse for Google Drive documents and embed directly in your posts and pages. Extends the popular Google Apps Login plugin so no extra user authentication (or admin setup) is required."
+msgstr ""
+
+#. Author of the plugin
+#: google_drive_embedder.php
+msgid "WP Glogin Team"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:21
+msgid "Please deactivate the version of Google Drive Embedder already in use before activating this version. Only one may be activated at a time."
+msgstr ""
+
+#: core/core_google_drive_embedder.php:33
+#: core/core_google_drive_embedder.php:35
+msgid "Add Google File"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:111
+msgid "All Files"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:126
+msgid "Enter text to search (then press Enter)"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:127
+msgid "Clear Search"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:136
+msgid "Viewer file link"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:140
+#: core/core_google_drive_embedder.php:163
+msgid "Show icon"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:144
+msgid "Open in new window"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:147
+#: core/core_google_drive_embedder.php:184
+msgid "Options..."
+msgstr ""
+
+#: core/core_google_drive_embedder.php:155
+msgid "Download file link"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:171
+msgid "Embed document"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:178
+msgid "Width"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:181
+msgid "Height"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:191
+#: core/core_google_drive_embedder.php:211
+msgid "Loading..."
+msgstr ""
+
+#: core/core_google_drive_embedder.php:196
+#: core/core_google_drive_embedder.php:216
+msgid "Click to authenticate via Google"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:202
+msgid "Previous"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:203
+msgid "Next"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:241
+msgid "Insert File"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:244
+msgid "Cancel"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:250
+msgid "I acknowledge that I will be demoted from owner to editor"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:285
+msgid "Google Drive Embedder requires an URL attribute"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:458
+msgid "Save Changes"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:480
+msgid "Unspecified error"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:524
+msgid "Settings saved"
+msgstr ""
+
+#: core/core_google_drive_embedder.php:624
+#, php-format
+msgid "<strong>Google Drive Embedder</strong>: You need to install and configure <a href=\"%s\" target=\"_blank\">Google Apps Login</a> plugin to make the plugin work (Free, Premium, or Enterprise version)."
+msgstr ""
+
+#: google_drive_embedder.php:69
+msgid "There are no settings to configure in this free version of Google Drive Embedder."
+msgstr ""
+
+#. translators: %s: link to website
+#: google_drive_embedder.php:76
+#, php-format
+msgid "Please <a href=\"%s\" target=\"_blank\">visit our website</a> for more details about our premium and enterprise versions."
+msgstr ""
+
+#: google_drive_embedder.php:84
+msgid "Premium Version"
+msgstr ""
+
+#: google_drive_embedder.php:90
+msgid "<strong>My Drive:</strong> locate files to embed by searching, browsing your Drive, starred or recent files - just like on Google Drive itself."
+msgstr ""
+
+#: google_drive_embedder.php:98
+msgid "<strong>Embed Folders:</strong> simply keep your Google Drive folder up-to-date with your files, and your staff or website visitors will always be able to view a list of the latest documents. For more advanced folder integration please take a look at the Enterprise version."
+msgstr ""
+
+#: google_drive_embedder.php:106
+msgid "<strong>Calendars:</strong> pick from your Google Calendars and provide download links to ICAL or XML, or embed them directly in your site."
+msgstr ""
+
+#: google_drive_embedder.php:114
+msgid "<strong>Support and updates</strong> for one year."
+msgstr ""
+
+#: google_drive_embedder.php:123
+#: google_drive_embedder.php:163
+msgid "Click here for details or purchase"
+msgstr ""
+
+#: google_drive_embedder.php:127
+msgid "Enterprise Version"
+msgstr ""
+
+#: google_drive_embedder.php:130
+msgid "Google Drive is a versatile way to store files and share with colleagues, while your intranet is clearer and better structured for sharing more focused information. "
+msgstr ""
+
+#: google_drive_embedder.php:132
+msgid "But using both at the same time can lead to confusion about where information is stored."
+msgstr ""
+
+#: google_drive_embedder.php:136
+msgid "Wouldn't it be great if your intranet could be used to control and structure the information your organization stores in Drive?"
+msgstr ""
+
+#: google_drive_embedder.php:140
+msgid "Our Enterprise version of Google Drive Embedder integrates Drive much more closely with your WordPress intranet, essentially allowing each page or post on your intranet to host its own file attachments, completely backed by Drive."
+msgstr ""
+
+#: google_drive_embedder.php:144
+msgid "This means you no longer need to manage Drive and your Intranet as two completely separate document sharing systems!"
+msgstr ""
+
+#: google_drive_embedder.php:148
+msgid "Drive Embedder Enterprise has all the features of the premium and basic versions - easily embed files from Google Drive into your WordPress site - plus much more advanced folder embedding. This starts with much slicker styling."
+msgstr ""
+
+#: google_drive_embedder.php:150
+msgid "Instead of embedding folders as iframes, they are built directly into your WordPress pages, meaning users can click into subfolders and preview files without leaving your website."
+msgstr ""
+
+#: google_drive_embedder.php:154
+msgid "Supports Google Shared Drives (Team Drives)."
+msgstr ""
+
+#: google_drive_embedder.php:158
+msgid "Includes support and updates for one year."
 msgstr ""

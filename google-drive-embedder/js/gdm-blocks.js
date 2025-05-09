@@ -2,9 +2,9 @@
  * Gutenberg block Javascript code
  */
 
-var __ = wp.i18n.__;
-var createElement = wp.element.createElement;
-var registerBlockType = wp.blocks.registerBlockType;
+const __ = wp.i18n.__;
+const createElement = wp.element.createElement;
+const registerBlockType = wp.blocks.registerBlockType;
 
 /**
  * Register block
@@ -17,7 +17,7 @@ var registerBlockType = wp.blocks.registerBlockType;
 registerBlockType(
 	'gdm/google-drive-embedder-viewer', // Registering a Block for the Drive Plugin
 	{
-		title: __('Embedder For Google Drive'),
+		title: __( 'Google Drive Embedder', 'google-drive-embedder' ),
 		icon: 'category',
 		category: 'common',
 		attributes: {
@@ -29,7 +29,7 @@ registerBlockType(
 		},
 
 		// Defines the block within the editor.
-		edit: function (props) {
+		edit: function( props ) {
 			var content = props.attributes.content;
 
 			var InspectorControls = wp.editor.InspectorControls;
@@ -37,29 +37,29 @@ registerBlockType(
 			var RichText = wp.editor.RichText;
 			var Editable = wp.blocks.Editable;
 
-			function updateMessage(newContent) {
-				props.setAttributes({ content: newContent });
+			function updateMessage( newContent ) {
+				props.setAttributes( { content: newContent } );
 			}
 
 			var { attributes, setAttributes, focus, className } = props;
 
-			var onAddGoogleFile = function (e) {
-				var chooseDriveFile = jQuery('#gdm-choose-drivefile');
+			var onAddGoogleFile = function( e ) {
+				var chooseDriveFile = jQuery( '#gdm-choose-drivefile' );
 
-				jQuery.gdmColorbox({
+				jQuery.gdmColorbox( {
 					href: chooseDriveFile,
 					inline: true,
-					onLoad: function () {
+					onLoad: function() {
 						chooseDriveFile.show();
 					},
-					onCleanup: function () {
+					onCleanup: function() {
 						chooseDriveFile.hide();
 					},
-				});
+				} );
 
-				window.setTimeout(function () {
+				window.setTimeout( function() {
 					gdmThickDims();
-				}, 1);
+				}, 1 );
 			};
 
 			var get_class = new Date();
@@ -67,21 +67,21 @@ registerBlockType(
 
 			function newButtonFunction() {
 				var class_name_full = 'p.' + class_name;
-				newContent = jQuery(class_name_full).text();
-				props.setAttributes({ content: newContent });
+				newContent = jQuery( class_name_full ).text();
+				props.setAttributes( { content: newContent } );
 				var hide_specific_button = 'button.' + class_name;
-				jQuery(hide_specific_button).css('display', 'none');
+				jQuery( hide_specific_button ).css( 'display', 'none' );
 			}
 
 			return [
-				createElement(RichText, {
+				createElement( RichText, {
 					tagName: 'p',
 					className: class_name,
 					value: props.attributes.content,
-					placeholder: 'ShortCode',
+					placeholder: __( 'Shortcode', 'google-drive-embedder' ),
 					key: 'New Text Area',
 					onChange: updateMessage,
-				}),
+				} ),
 				createElement(
 					'button',
 					{
@@ -98,7 +98,7 @@ registerBlockType(
 						},
 						onClick: newButtonFunction,
 					},
-					__('Click to Add ShortCode'),
+					__( 'Click to Add ShortCode' ),
 				),
 
 				createElement(
@@ -110,7 +110,7 @@ registerBlockType(
 						createElement(
 							'p',
 							{},
-							__('Enter Google Drive file using this button.'),
+							__( 'Enter Google Drive file using this button.', 'google-drive-embedder' ),
 						),
 						createElement(
 							'span',
@@ -132,7 +132,7 @@ registerBlockType(
 									cursor: 'pointer',
 								},
 							},
-							__('Select Google File'),
+							__( 'Select Google File', 'google-drive-embedder' ),
 						),
 					),
 				),
@@ -140,7 +140,7 @@ registerBlockType(
 		},
 
 		// Defines the saved block.
-		save: function (props) {
+		save: function( props ) {
 			return createElement(
 				'p',
 				{
@@ -154,42 +154,46 @@ registerBlockType(
 );
 
 function enable_append_btn() {
-	var className = jQuery('span#gde_ins_btn_gb').attr('class');
+	var className = jQuery( 'span#gde_ins_btn_gb' ).attr( 'class' );
 	var btn_add_name = 'button.' + className;
-	jQuery(btn_add_name).css('display', 'block');
-	setTimeout(function () {
-		jQuery(btn_add_name).click();
-	}, 10);
-	jQuery('button#gdmCboxClose').click();
+	jQuery( btn_add_name ).css( 'display', 'block' );
+	setTimeout( function() {
+		jQuery( btn_add_name ).click();
+	}, 10 );
+	jQuery( 'button#gdmCboxClose' ).click();
 }
+
 function close_insert_popup() {
-	jQuery('button#gdmCboxClose').click();
+	jQuery( 'button#gdmCboxClose' ).click();
 }
-jQuery(document).ready(function () {
-	jQuery(document).on('click', 'button#gdmCboxClose', function () {
-		var getData = jQuery('#gdmCboxTitle').html();
-		if (getData) {
-			jQuery('#gdm-choose-drivefile').css('display', 'none');
-			setTimeout(openSelectBox, 350);
+
+jQuery( document ).ready( function() {
+	jQuery( document ).on( 'click', 'button#gdmCboxClose', function() {
+		var getData = jQuery( '#gdmCboxTitle' ).html();
+		if ( getData ) {
+			jQuery( '#gdm-choose-drivefile' ).css( 'display', 'none' );
+			setTimeout( openSelectBox, 350 );
 		} else {
 			//alert("content not found");
 		}
-	});
-	function openSelectBox() {
-		jQuery('span#gde_ins_btn_gb').click();
-	}
-});
+	} );
 
-jQuery(document).on('keydown', function (e) {
-	if (e.keyCode === 27) {
-		var getData = jQuery('#gdmCboxTitle').html();
-		if (getData) {
-			jQuery('#gdm-choose-drivefile').css('display', 'none');
-			setTimeout(openSelectBox, 350);
+	function openSelectBox() {
+		jQuery( 'span#gde_ins_btn_gb' ).click();
+	}
+} );
+
+jQuery( document ).on( 'keydown', function( e ) {
+	if ( e.keyCode === 27 ) {
+		var getData = jQuery( '#gdmCboxTitle' ).html();
+		if ( getData ) {
+			jQuery( '#gdm-choose-drivefile' ).css( 'display', 'none' );
+			setTimeout( openSelectBox, 350 );
 		} else {
 		}
+
 		function openSelectBox() {
-			jQuery('span#gde_ins_btn_gb').click();
+			jQuery( 'span#gde_ins_btn_gb' ).click();
 		}
 	}
-});
+} );

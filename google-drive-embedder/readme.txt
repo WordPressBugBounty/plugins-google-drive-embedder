@@ -1,13 +1,13 @@
-=== Embedder For Google Drive ===
-Contributors: lionsher, nathansingh, chrisakelley
-Tags: drive, google, document, google apps, google workspace, google drive, sso, auth, intranet, embed, g drive, google workspace
-Requires at least: 5.0
-Tested up to: 6.2.0
-Stable tag: 5.2.6
-License: GPLv3
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+=== Embed Files from Google Drive ===
+Contributors: slaFFik, jaredatch, smub
+Tags: google, document, google apps, google drive, embed
+Requires at least: 5.5
+Requires PHP: 7.2
+Tested up to: 6.8
+Stable tag: 5.3.0
+License: GPL-2.0-or-later
 
-Browse for Google Drive documents and embed directly in your posts/pages. This WordPress plugin extends the Google Apps Login plugin so no extra user authentication required.
+Browse for Google Drive documents and embed directly in your posts/pages. Extends Google Apps Login plugin so no extra user auth required.
 
 == Description ==
 
@@ -32,7 +32,7 @@ Works on all WordPress installations including multisite networks.
 
 Please note that to embed folders you will require the Premium or Enterprise version of this plugin.
 
-[youtube http://www.youtube.com/watch?v=wcpjcFJIOko]
+[youtube https://www.youtube.com/watch?v=wcpjcFJIOko]
 
 = Paid versions and Support =
 
@@ -45,7 +45,7 @@ The **Premium version** contains some important extra features:
 * Google Calendars: pick from your Google Calendars and provide download links to ICAL or XML, or embed them directly in your site.
 * Support and updates for one year.
 
-[Premium - See details and purchase](http://wp-glogin.com/drive/?utm_source=Drive%20ReadmePromo&utm_medium=freemium&utm_campaign=Freemium)
+[Premium - See details and purchase](https://wp-glogin.com/drive/?utm_source=Drive%20ReadmePromo&utm_medium=freemium&utm_campaign=Freemium)
 
 The **Enterprise version** integrates Google Drive much more closely with your WordPress intranet, essentially allowing each
 page or post on your intranet to host its own file attachments, completely backed by Drive.
@@ -57,34 +57,35 @@ leaving your site.
 
 It also contains all the features of the basic and premium versions, plus support for *Team Drives (Shared Drives)*.
 
-[Enterprise - Find out more](http://wp-glogin.com/drive/enterprise/?utm_source=Drive%20ReadmeEntPromo&utm_medium=freemium&utm_campaign=Freemium)
+[Enterprise - Find out more](https://wp-glogin.com/drive/enterprise/?utm_source=Drive%20ReadmeEntPromo&utm_medium=freemium&utm_campaign=Freemium)
 
 = Requirements =
 
 Google Drive document embedding and one-click login will work for the following domains and user accounts:
 
-*  Google Workplace Business
-*  Google Workplace for Nonprofits
-*  Google Workplace for Government
-*  Google Classroom (Google Workplace for Education)
+*  G Suite Basic (Google Apps for Work)
+*  G Suite Business (Google Apps Unlimited for Work)
+*  G Suite for Education (Google Apps for Education)
+*  G Suite for Non-profits (Google Apps for Non-profits)
+*  G Suite for Government (Google Apps for Government)
 *  Personal gmail.com and googlemail.com emails
 
-Google Apps Login plugin setup requires you to have admin access to any Google Workplace domain (formerly Google Apps), or a regular Gmail account, to register and
+Google Apps Login plugin setup requires you to have admin access to any G Suite domain (formerly Google Apps), or a regular Gmail account, to register and
 obtain two simple codes from Google.
 
 = Google Apps Login =
 
-The [Google Apps Login](http://wp-glogin.com/wpgoogleappslogin) plugin (which you must also install)
-allows existing Wordpress user accounts to login to the website
+The [Google Apps Login](https://wordpress.org/plugins/google-apps-login/) plugin (which you must also install)
+allows existing WordPress user accounts to log in to the website
 using Google to securely authenticate their account. This means that if they are already logged into Gmail for example,
-they can simply click their way through the Wordpress login screen - no username or password is explicitly required!
+they can simply click their way through the WordPress login screen - no username or password is explicitly required!
 
 Full support and premium features are also available for purchase:
 
-Eliminate the need for Google Workplace (formally Google Apps / G Suite) domain admins to  separately manage WordPress user accounts, and get peace
+Eliminate the need for G Suite / Google Apps domain admins to  separately manage WordPress user accounts, and get peace
 of mind that only authorized employees have access to the organizations's websites and intranet.
 
-**See [http://wp-glogin.com/](http://wp-glogin.com/?utm_source=Drive%20Readme&utm_medium=freemium&utm_campaign=Freemium)**
+**See [https://wp-glogin.com/](https://wp-glogin.com/?utm_source=Drive%20Readme&utm_medium=freemium&utm_campaign=Freemium)**
 
 
 == Screenshots ==
@@ -108,8 +109,7 @@ Please feel free to email [support@wp-glogin.com](mailto:support@wp-glogin.com) 
 as we may be able to help, but you may be required to purchase a support license if the problem
 is specific to your installation or requirements.
 
-We may occasionally be able to respond to support queries posted on the 'Support' forum here on the wordpress.org
-plugin page, but we recommend sending us an email instead if possible.
+We may occasionally be able to respond to support queries posted on the 'Support' forum here on the wordpress.org plugin page, but we recommend sending us an email instead if possible.
 
 = How can I embed Drive Folders in my website? =
 
@@ -208,7 +208,7 @@ any further plugins (which extend Google Apps Login) to individual site administ
 
 = I have installed Google Apps Login plugin but the Google Drive plugin still says I need to install it =
 
-Are you sure you have upgraded to the latest version - must be 2.0 or higher?
+Are you sure you have upgraded to the latest version?
 
 Have you also configured the plugin? Under Settings -> Google Apps Login, you will need to follow the instructions
 to obtain a Client ID and Client Secret from Google Cloud Console, and enter them into that settings page.
@@ -216,191 +216,82 @@ to obtain a Client ID and Client Secret from Google Cloud Console, and enter the
 = How can I purchase the premium or enterprise version? =
 
 You can purchase a license here:
-[http://wp-glogin.com/drive/](http://wp-glogin.com/drive/?utm_source=Drive%20ReadmeFAQ&utm_medium=freemium&utm_campaign=Freemium)
-
-= What are the system requirements? =
-
-*  PHP 5.2.x or higher with Curl and JSON extensions
-*  Wordpress 4.0 or above
-
-And you will need a Google account to set up the Google Apps Login plugin.
+[https://wp-glogin.com/drive/](https://wp-glogin.com/drive/?utm_source=Drive%20ReadmeFAQ&utm_medium=freemium&utm_campaign=Freemium)
 
 == Installation ==
 
-For the Google Drive plugin to work, you will need also need to install and configure the Google Apps Login plugin
-(either before or after).
+For the Google Drive plugin to work, you will need also need to install and configure the Google Apps Login plugin (either before or after).
 
 Google Drive plugin:
 
 1. Go to your WordPress admin control panel's plugin page
-1. Search for 'Embedder For Google Drive'
+1. Search for "Embedder For Google Drive" or "Embedder for Google Drive"
 1. Click Install
 1. Click Activate on the plugin
-1. If you do not have the correct version of Google Apps Login installed, you will see a warning notice to that effect, in
-which case you should follow the instructions below
+1. If you do not have the correct version of Google Apps Login installed, you will see a warning notice to that effect, in which case you should follow the instructions below
 
 Google Apps Login plugin:
 
 1. Go to your WordPress admin control panel's plugin page
-1. Search for 'Google Apps Login'
+1. Search for "Google Apps Login" or "Login for Google Apps"
 1. Click Install
 1. Click Activate on the plugin
-1. Go to 'Google Apps Login' under Settings in your Wordpress admin area
+1. Go to 'Google Apps Login' under Settings in your WordPress admin area
 1. Follow the instructions on that page to obtain two codes from Google, and also submit two URLs back to Google
 1. **In the Google Cloud Console, you must also enable the switch for Google Drive API access**
 
 If you cannot install from the WordPress plugins directory for any reason, and need to install from ZIP file:
 
-1. For Google Drive plugin: Upload `googledriveembedder` directory and contents to the `/wp-content/plugins/` directory,
-or upload the ZIP file directly in the Plugins section of your Wordpress admin
-1. For Google Apps Login plugin: Upload `googleappslogin` directory and contents to the `/wp-content/plugins/` directory,
-or upload the ZIP file directly in the Plugins section of your Wordpress admin
+1. For Google Drive plugin: Upload `google-drive-embedder` directory and contents to the `/wp-content/plugins/` directory, or upload the ZIP file directly in the Plugins section of your WordPress admin
+1. For Google Apps Login plugin: Upload `google-apps-login` directory and contents to the `/wp-content/plugins/` directory, or upload the ZIP file directly in the Plugins section of your WordPress admin
 1. Follow the instructions to configure the Google Apps Login plugin post-installation
 
 == Changelog ==
-=5.2.6=
 
-Updated: Move to Google Identity Services
+= 5.3.0 =
+* Updated: Compatibility with WordPress 6.8.
+* Updated: Compatibility with PHP 8.
+* Fixed: A lot of plugin strings were not translatable, now the plugin can be fully translated into any language.
+* Fixed: Images from Google Drive can now again be embedded on a page. Don't forget to set the proper width and height in a shortcode or a block.
+* Fixed: A lot of code styles fixes and cleanups.
+* Fixed: In certain cases, the plugin was generating a lot of PHP Notices and Deprecation notices on PHP 8.
 
-=5.2.5=
+= 5.2.6 =
+* Updated: Move to Google Identity Services.
 
-Fix: PHP Error with Shortcode
+= 5.2.5 =
+* Fix: PHP Error with Shortcode.
 
-=5.2.4=
+= 5.2.4 =
+* Change: Update Plugin Name.
+* Fix: Sanitize setting inputs.
 
-Change: Update Plugin Name
-Fix: Sanitize setting inputs
+= 5.2.3 =
+* Added compatibility for WordPress 5.6.
 
-=5.2.3=
+= 5.2.2 =
+* Updated Team Drive to Shared Drive in compliance of Google Drive updates.
+* Added compatibility for WordPress 5.4.1.
 
-Added compatibility for Wordpress 5.6
+= 5.2.1 =
+* Added American with Disabilities Act compliance compatibility for Embedder For Google Drive folder and files icons.
+* Added compatibility for WordPress 5.3.2.
 
-=5.2.2=
-
-Updated Team Drive to Shared Drive in compliance of Google Drive updates.
-Added compatibility for Wordpress 5.4.1
-
-=5.2.1=
-
-Added American with Disabilities Act compliance compatibility for google drive folder and files icons
-Added compatibility for Wordpress 5.3.2
-
-=5.2=
-
-Added compatibility for Wordpress 5.3.1
+= 5.2 =
+* Added compatibility for WordPress 5.3.1.
 
 = 5.1 =
-
-Added compatibility for Wordpress 5.2.1
+* Added compatibility for WordPress 5.2.1.
 
 = 5.0 =
-
-Added compatibility for Wordpress 5.0
+* Added compatibility for WordPress 5.0.
 
 = 4.2 =
-
-Compatibility for Gutenberg Editor
+* Compatibility for Gutenberg Editor.
 
 = 4.1 =
-
-No longer asks user for Drive permissions when they 'Login with Google'. Instead, it asks for Drive
-permissions only when they come to interact with the Drive functionality (clicking 'Add Google File' for example).
+* No longer asks user for Drive permissions when they 'Login with Google'. Instead, it asks for Drive permissions only when they come to interact with the Drive functionality (clicking 'Add Google File' for example).
 
 = 4.0 =
-
-Free version now supports videos, images, and forms.
-
-Changed to Google Drive API v3.
-
-= 3.9.7 =
-
-Some file titles were not being escaped correctly ([ and ] characters) so could cause WordPress to parse the shortcode incorrectly.
-
-= 3.9.2 =
-
-Fix to match a change made by Google in the way the API works.
-
-= 3.9.1 =
-
-Some users were seeing warning messages about a missing variable - now fixed.
-
-= 3.9 =
-
-Updated readme to reflect new Google Workplace naming.
-Some internal code refactoring bringing up to date with Premium/Enterprise versions.
-
-= 3.8.5 =
-
-Improved error handling when admin inadvertently activates multiple versions of the plugin.
-
-= 3.8.2 =
-
-No longer shows trashed files in Add Google File dialog box.
-
-= 3.8.1 =
-
-iframe embeds (e.g. videos) now have allowfullscreen as a default attribute so the viewer can click into full screen mode.
-Add allowfullscreen="no" to your shortcode to turn this off.
-
-The jump in version number is to match Enterprise/Premium versions of the plugin.
-
-= 3.7 =
-
-Ready for WordPress 4.4.
-Internal changes for code readability and to prepare for 'My Drive' version.
-
-= 3.6 =
-
-Due to changes in Google's Drive API some embeds (e.g. PDFs) were not always showing up. This version fixes it.
-
-= 3.3 =
-
-Workaround for a Google change to iFrame permissions - PDF and other standalone docs now embed better.
-
-= 3.2 =
-
-Embed as Drive is now the only option for non-native file types (e.g. PDF, Word, Excel). Avoids the old-style Google Document Viewer completely.
-
-= 3.1.1 =
-
-Introduced 'Embed As Drive' option (now default) for non-native file types (e.g. PDF, Word, Excel).
-This uses Drive natively rather than sending the file via the external Google Document Viewer.
-It also means non-native file types can be embedded based on permissions of the logged-in Google user - does not required Anyone with the link can view.
-
-= 3.1 =
-
-Tidied up file structure, and brought documentation in line with the new Enterprise version of Embedder For Google Drive.
-
-= 2.3 =
-
-Provides information about Google forms availability
-
-= 2.2 =
-
-Instructions for video embed
-
-= 2.1 =
-
-Clearer error messages
-
-= 2.0 =
-
-Provides information about premium upgrade to embed certain new filetypes
-
-= 1.4 =
-
-Layout changes ready for WordPress 3.9 release
-
-= 1.3 =
-
-Extra support for non-Google file types such as PDF, Word DOC - can now be embedded inline or direct-download links.
-
-= 1.2 =
-Added Search box functionality
-
-= 1.1 =
-Multisite installations now have the choice of Network Activate (so Add Drive File available on all sites), or
-individual sub-site activation.
-
-= 1.0 =
-Google Drive document embedder
+* Free version now supports videos, images, and forms.
+* Changed to Google Drive API v3.

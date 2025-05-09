@@ -1,8 +1,8 @@
-var gdmDriveMgr = (function ($) {
+var gdmDriveMgr = ( function( $ ) {
 	var tokenClient;
-	var __bind = function (fn, me) {
-		return function () {
-			return fn.apply(me, arguments);
+	var __bind = function( fn, me ) {
+		return function() {
+			return fn.apply( me, arguments );
 		};
 	};
 
@@ -28,179 +28,179 @@ var gdmDriveMgr = (function ($) {
 
 		_browserRegistry: GdmBrowserRegistry, // Set in either gdm-premium-drivefile.js or gdm-basic-drivefile.js
 
-		setServiceHandler: function (type) {
+		setServiceHandler: function( type ) {
 			this.serviceType = type;
 			this._serviceHandler = new this._serviceHandlerRegistry[
 				this.serviceType
-			]();
+				]();
 			this.resetSearchBox();
 		},
-		gapiInit: async function () {
+		gapiInit: async function() {
 			gapi.client
-				.init({
+				.init( {
 					// NOTE: OAuth2 'scope' and 'client_id' parameters have moved to initTokenClient().
-				})
-				.then(function () {
+				} )
+				.then( function() {
 					// Load the Calendar API discovery document.
 					gapi.client.load(
 						'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest',
 					);
 					gapiInited = true;
-				});
+				} );
 		},
-		gapiLoad: async function () {
+		gapiLoad: async function() {
 			var self = this;
-			await new Promise((resolve) => {
-				gapi.load('client', () => {
+			await new Promise( ( resolve ) => {
+				gapi.load( 'client', () => {
 					self.gapiInit();
 					resolve();
-				});
-			});
+				} );
+			} );
 		},
-		getServiceHandler: function () {
+		getServiceHandler: function() {
 			return this._serviceHandler;
 		},
 
-		makeApiCall: function () {
-			if (!this.getServiceHandler().getAvailable()) {
+		makeApiCall: function() {
+			if ( ! this.getServiceHandler().getAvailable() ) {
 				this.fileBrowser.displayMessage(
 					'<p>Purchase the Premium or Enterprise version of Embedder For Google Drive: <br />- Locate your files via <i>My Drive</i>, <i>Starred</i>, <i>Shared with Me</i> etc<br />' +
-						'- Embed Calendars and iframe folders<br /> ' +
-						'- Browse and search your Team Drives (Enterprise)<br /> ' +
-						'- Interactive embedded folders including drag-and-drop to upload (Enterprise)<br /> ' +
-						'<a href="http://wp-glogin.com/drive/?utm_source=Calendar%20Reason&utm_medium=freemium&utm_campaign=Drive" target="_blank">Find out more</a></p>',
+					'- Embed Calendars and iframe folders<br /> ' +
+					'- Browse and search your Team Drives (Enterprise)<br /> ' +
+					'- Interactive embedded folders including drag-and-drop to upload (Enterprise)<br /> ' +
+					'<a href="http://wp-glogin.com/drive/?utm_source=Calendar%20Reason&utm_medium=freemium&utm_campaign=Drive" target="_blank">Find out more</a></p>',
 				);
 				return;
 			}
 
 			var current_search_query = this.current_search_query;
 
-			this.fileBrowser.startQuery(current_search_query);
+			this.fileBrowser.startQuery( current_search_query );
 		},
 
-		gdmNothingSelected: function () {
+		gdmNothingSelected: function() {
 			this.hideMoreOptions();
-			$('#gdm-insert-drivefile').attr('disabled', 'disabled');
-			var baseLinkTypes = $('#gdm-linktypes-div');
-			baseLinkTypes.find('input, label').attr('disabled', 'disabled');
+			$( '#gdm-insert-drivefile' ).attr( 'disabled', 'disabled' );
+			var baseLinkTypes = $( '#gdm-linktypes-div' );
+			baseLinkTypes.find( 'input, label' ).attr( 'disabled', 'disabled' );
 
-			$('#gdm-linktype-normal-options').hide();
-			$('#gdm-linktype-download-options').hide();
-			$('#gdm-linktype-download-reasons').hide();
-			$('#gdm-linktype-embed-options').hide();
-			$('#gdm-linktype-embed-reasons').hide();
+			$( '#gdm-linktype-normal-options' ).hide();
+			$( '#gdm-linktype-download-options' ).hide();
+			$( '#gdm-linktype-download-reasons' ).hide();
+			$( '#gdm-linktype-embed-options' ).hide();
+			$( '#gdm-linktype-embed-reasons' ).hide();
 
-			$('#gdm-ack-owner-editor').hide();
+			$( '#gdm-ack-owner-editor' ).hide();
 
 			this.selectedId = null;
 		},
 
-		gdmSomethingSelected: function (id) {
-			if (!id) {
+		gdmSomethingSelected: function( id ) {
+			if ( ! id ) {
 				this.gdmNothingSelected();
 				return;
 			}
 
-			var links = this.getServiceHandler().getFileLinks(id);
+			var links = this.getServiceHandler().getFileLinks( id );
 
-			var baseLinkTypes = $('#gdm-linktypes-div');
-			baseLinkTypes.find('input, label').removeAttr('disabled');
+			var baseLinkTypes = $( '#gdm-linktypes-div' );
+			baseLinkTypes.find( 'input, label' ).removeAttr( 'disabled' );
 
 			this.hideMoreOptions();
-			if (links.extra == 'calendar') {
-				$('#gdm-linktype-normal-more').show();
+			if ( links.extra === 'calendar' ) {
+				$( '#gdm-linktype-normal-more' ).show();
 			} else {
-				$('#gdm-linktype-normal-more').hide();
+				$( '#gdm-linktype-normal-more' ).hide();
 			}
 
-			$('#gdm-linktype-normal-options').hide();
+			$( '#gdm-linktype-normal-options' ).hide();
 
-			$('#gdm-linktype-download-options').hide();
-			$('#gdm-linktype-download-reasons').hide();
+			$( '#gdm-linktype-download-options' ).hide();
+			$( '#gdm-linktype-download-reasons' ).hide();
 
-			$('#gdm-ack-owner-editor').hide();
+			$( '#gdm-ack-owner-editor' ).hide();
 
-			if (!links.download.url && !links.download.exports) {
-				$('#gdm-linktype-download').attr('gdm-available', 'true');
+			if ( ! links.download.url && ! links.download.exports ) {
+				$( '#gdm-linktype-download' ).attr( 'gdm-available', 'true' );
 
-				$('#gdm-linktype-download-reasons').html(
+				$( '#gdm-linktype-download-reasons' ).html(
 					' - ' +
-						this.getServiceHandler().getReasonText(
-							links.download.reason,
-						),
+					this.getServiceHandler().getReasonText(
+						links.download.reason,
+					),
 				);
 			} else {
-				$('#gdm-linktype-download').attr('gdm-available', 'false');
+				$( '#gdm-linktype-download' ).attr( 'gdm-available', 'false' );
 
-				var fileTypesSelect = $('#gdm-linktype-download-type');
+				var fileTypesSelect = $( '#gdm-linktype-download-type' );
 				// Is it a download or an export
-				if (links.download.url || !links.download.exports) {
+				if ( links.download.url || ! links.download.exports ) {
 					fileTypesSelect.hide();
 				} else {
 					fileTypesSelect.empty();
-					for (prop in links.download.exports) {
+					for ( prop in links.download.exports ) {
 						fileTypesSelect.append(
-							$('<option>', {
-								value: links.download.exports[prop],
-							}).text(prop),
+							$( '<option>', {
+								value: links.download.exports[ prop ],
+							} ).text( prop ),
 						);
 					}
 					fileTypesSelect.show();
 				}
 			}
 
-			$('#gdm-linktype-embed-options').hide();
-			$('#gdm-linktype-embed-reasons').hide();
-			$('.gdm-linktype-embed-folder').hide();
+			$( '#gdm-linktype-embed-options' ).hide();
+			$( '#gdm-linktype-embed-reasons' ).hide();
+			$( '.gdm-linktype-embed-folder' ).hide();
 
-			if (!links.embed.url) {
-				$('#gdm-linktype-embed').attr('gdm-available', 'true');
+			if ( ! links.embed.url ) {
+				$( '#gdm-linktype-embed' ).attr( 'gdm-available', 'true' );
 
-				$('#gdm-linktype-embed-reasons').html(
+				$( '#gdm-linktype-embed-reasons' ).html(
 					' - ' +
-						this.getServiceHandler().getReasonText(
-							links.embed.reason,
-						),
+					this.getServiceHandler().getReasonText(
+						links.embed.reason,
+					),
 				);
 			} else {
-				$('#gdm-linktype-embed').attr('gdm-available', 'false');
+				$( '#gdm-linktype-embed' ).attr( 'gdm-available', 'false' );
 
 				if (
-					links.extra == 'calendar' ||
-					(links.extra == 'folder' &&
-						gdm_trans.allow_non_iframe_folders)
+					links.extra === 'calendar' ||
+					( links.extra === 'folder' &&
+						gdm_trans.allow_non_iframe_folders )
 				) {
-					$('#gdm-linktype-embed-more')
-						.attr('data-gdm-embed-more-type', links.extra)
+					$( '#gdm-linktype-embed-more' )
+						.attr( 'data-gdm-embed-more-type', links.extra )
 						.show();
 				} else {
-					$('#gdm-linktype-embed-more').hide();
+					$( '#gdm-linktype-embed-more' ).hide();
 				}
 
 				if (
 					typeof links.width != 'undefined' &&
 					typeof links.height != 'undefined'
 				) {
-					if (this.saveMyDims) {
-						this.savedWidth = $('#gdm-linktype-embed-width').attr(
+					if ( this.saveMyDims ) {
+						this.savedWidth = $( '#gdm-linktype-embed-width' ).attr(
 							'value',
 						);
-						this.savedHeight = $('#gdm-linktype-embed-height').attr(
+						this.savedHeight = $( '#gdm-linktype-embed-height' ).attr(
 							'value',
 						);
 					}
-					$('#gdm-linktype-embed-width').attr('value', links.width);
-					$('#gdm-linktype-embed-height').attr('value', links.height);
+					$( '#gdm-linktype-embed-width' ).attr( 'value', links.width );
+					$( '#gdm-linktype-embed-height' ).attr( 'value', links.height );
 					this.saveMyDims = false;
 				} else {
-					if (this.savedWidth) {
-						$('#gdm-linktype-embed-width').attr(
+					if ( this.savedWidth ) {
+						$( '#gdm-linktype-embed-width' ).attr(
 							'value',
 							this.savedWidth,
 						);
 					}
-					if (this.savedHeight) {
-						$('#gdm-linktype-embed-height').attr(
+					if ( this.savedHeight ) {
+						$( '#gdm-linktype-embed-height' ).attr(
 							'value',
 							this.savedHeight,
 						);
@@ -209,224 +209,203 @@ var gdmDriveMgr = (function ($) {
 				}
 				// set width and height
 
-				if (links.extra == 'folder') {
-					$('.gdm-linktype-embed-folder').show();
+				if ( links.extra === 'folder' ) {
+					$( '.gdm-linktype-embed-folder' ).show();
 				}
 			}
 
-			$('.gdm-linktypes-span input:checked').change();
+			$( '.gdm-linktypes-span input:checked' ).change();
 
 			// Enterprise only
-			if (this.getServiceHandler().showOwnerEditorWarning()) {
-				$('#gdm-ack-owner-editor').show();
+			if ( this.getServiceHandler().showOwnerEditorWarning() ) {
+				$( '#gdm-ack-owner-editor' ).show();
 			}
 
 			this.selectedId = id;
 		},
 
-		gdmInsertDriveFile: function (event) {
+		gdmInsertDriveFile: function( event ) {
 			// Send the shortcode to the editor
-
-			if (this.selectedId) {
-				if (!this.getServiceHandler().allowInsertDriveFile()) {
+			if ( this.selectedId ) {
+				if ( ! this.getServiceHandler().allowInsertDriveFile() ) {
 					return;
 				}
 
 				var id = this.selectedId;
 
-				var links = this.getServiceHandler().getFileLinks(id);
+				var links = this.getServiceHandler().getFileLinks( id );
 
 				var icon = links.icon.url;
 				var extraattrs = '';
 				var url = '';
 
 				var linkStyle = '';
-				if ($('#gdm-linktype-normal').prop('checked') == true) {
+				if ( $( '#gdm-linktype-normal' ).prop( 'checked' ) === true ) {
 					linkStyle = 'normal';
-					if ($('#gdm-linktype-normal-window').prop('checked')) {
+					if ( $( '#gdm-linktype-normal-window' ).prop( 'checked' ) ) {
 						extraattrs = ' newwindow="yes"';
 					}
-					if (!$('#gdm-linktype-normal-plain').prop('checked')) {
+					if ( ! $( '#gdm-linktype-normal-plain' ).prop( 'checked' ) ) {
 						extraattrs += ' plain="yes"';
 					}
 					url = links.viewer.url;
 				} else if (
-					$('#gdm-linktype-download').prop('checked') == true
+					$( '#gdm-linktype-download' ).prop( 'checked' ) === true
 				) {
 					linkStyle = 'download';
 					url = links.download.url;
 
-					if (!url && links.download && links.download.exports) {
-						url = $('#gdm-linktype-download-type').val();
+					if ( ! url && links.download && links.download.exports ) {
+						url = $( '#gdm-linktype-download-type' ).val();
 					}
 
-					if (!$('#gdm-linktype-download-plain').prop('checked')) {
+					if ( ! $( '#gdm-linktype-download-plain' ).prop( 'checked' ) ) {
 						extraattrs += ' plain="yes"';
 					}
-				} else if ($('#gdm-linktype-embed').prop('checked') == true) {
+				} else if ( $( '#gdm-linktype-embed' ).prop( 'checked' ) === true ) {
 					if (
-						links.extra == 'folder' &&
-						$('#gdm-foldertype-iframe').prop('checked') == false
+						links.extra === 'folder' &&
+						$( '#gdm-foldertype-iframe' ).prop( 'checked' ) === false
 					) {
 						// Completely different shortcode type
-						if (gdmInsertFolderShortcode) {
-							gdmInsertFolderShortcode(links);
+						if ( gdmInsertFolderShortcode ) {
+							gdmInsertFolderShortcode( links );
 							return;
 						}
 					}
 
 					linkStyle = 'embed';
 					url = links.embed.url;
-					var width = this.gdmValidateDimension(
-						$('#gdm-linktype-embed-width').attr('value'),
-						'100%',
-					);
-					var height = this.gdmValidateDimension(
-						$('#gdm-linktype-embed-height').attr('value'),
-						'400',
-					);
-					extraattrs =
-						' width="' + width + '" height="' + height + '"';
-					if (links.extra) {
+
+					var width  = this.gdmValidateDimension( $( '#gdm-linktype-embed-width' ).attr( 'value' ), '100%' );
+					var height = this.gdmValidateDimension( $( '#gdm-linktype-embed-height' ).attr( 'value' ), '400' );
+
+					extraattrs = ' width="' + width + '" height="' + height + '"';
+
+					if ( links.extra ) {
 						extraattrs += ' extra="' + links.extra + '"';
 					}
 				}
 
-				// Calendar more options
+				// Calendar more options.
 				if (
-					(linkStyle == 'normal' || linkStyle == 'embed') &&
+					( linkStyle === 'normal' || linkStyle === 'embed' ) &&
 					links.extra &&
-					links.extra == 'calendar'
+					links.extra === 'calendar'
 				) {
 					var extraparams = {};
-					$('.gdm-more-boolean').each(function (index, elt) {
-						var jelt = $(elt);
-						if (!jelt.prop('checked')) {
-							var optname = jelt.attr('name');
-							extraparams[optname] = '0';
+					$( '.gdm-more-boolean' ).each( function( index, elt ) {
+						var jelt = $( elt );
+						if ( ! jelt.prop( 'checked' ) ) {
+							var optname = jelt.attr( 'name' );
+							extraparams[ optname ] = '0';
 						}
-					});
-					extraparams['wkst'] = $('#gdm-more-wkst').val();
-					extraparams['mode'] = $(
+					} );
+					extraparams[ 'wkst' ] = $( '#gdm-more-wkst' ).val();
+					extraparams[ 'mode' ] = $(
 						'input:radio[name=gdm-more-mode]:checked',
 					).val();
-					var caltitle = $('#gdm-more-title').val();
-					if (caltitle != '') {
-						extraparams['title'] = encodeURIComponent(caltitle);
+					var caltitle = $( '#gdm-more-title' ).val();
+					if ( caltitle !== '' ) {
+						extraparams[ 'title' ] = encodeURIComponent( caltitle );
 					}
-					for (param in extraparams) {
-						url += '&' + param + '=' + extraparams[param];
+					for ( param in extraparams ) {
+						url += '&' + param + '=' + extraparams[ param ];
 					}
 				}
 
 				/*var a = ('[google-drive-embed url="' + url + '" title="'
-                    + this.escapeHTML(links.title) + '"'
-                    + ' icon="' + icon + '"'
-                    + extraattrs
-                    + ' style="' + linkStyle + '"]');
+				 + this.escapeHTML(links.title) + '"'
+				 + ' icon="' + icon + '"'
+				 + extraattrs
+				 + ' style="' + linkStyle + '"]');
 
-				var b = '"' + a + '"';*/
+				 var b = '"' + a + '"';*/
 
-				var latest_classname =
-					document.getElementById('gde_ins_btn_gb');
+				var latest_classname = document.getElementById( 'gde_ins_btn_gb' );
 
-				if (latest_classname) {
-					var latest_classname =
-						document.getElementById('gde_ins_btn_gb').className;
+				if ( latest_classname ) {
+					var latest_classname = document.getElementById( 'gde_ins_btn_gb' ).className;
 					var latest_classname = 'p.' + latest_classname;
 
 					//alert(latest_classname);
-					jQuery(latest_classname).text(
-						'[google-drive-embed url="' +
-							url +
-							'" title="' +
-							this.escapeHTML(links.title) +
-							'"' +
-							' icon="' +
-							icon +
-							'"' +
-							extraattrs +
-							' style="' +
-							linkStyle +
-							'"]',
+					jQuery( latest_classname ).text(
+						'[google-drive-embed url="' + url + '" ' +
+						'title="' + this.escapeHTML( links.title ) + '" ' +
+						'icon="' + icon + '"' +
+						extraattrs +
+						' style="' + linkStyle + '"]',
 					);
 				}
 
 				// Send to editor
 				window.send_to_editor(
-					'[google-drive-embed url="' +
-						url +
-						'" title="' +
-						this.escapeHTML(links.title) +
-						'"' +
-						' icon="' +
-						icon +
-						'"' +
-						extraattrs +
-						' style="' +
-						linkStyle +
-						'"]',
+					'[google-drive-embed url="' + url + '" ' +
+					'title="' + this.escapeHTML( links.title ) + '"' +
+					' icon="' + icon + '"' +
+					extraattrs +
+					' style="' + linkStyle + '"]',
 				);
 
 				// Set file parent/owner in Enterprise version
-				if (this.getServiceHandler().allowSetEmbedOwnerParent()) {
-					gdmSetEmbedSAOwnerParent(id);
+				if ( this.getServiceHandler().allowSetEmbedOwnerParent() ) {
+					gdmSetEmbedSAOwnerParent( id );
 				}
 			}
 		},
 
-		gdmValidateDimension: function (dimStr, defaultStr) {
-			if (dimStr.match(/^ *[0-9]+ *(\%|px)? *$/i)) {
-				return dimStr.replace(/ /g, '');
+		gdmValidateDimension: function( dimStr, defaultStr ) {
+			if ( dimStr.match( /^ *[0-9]+ *(\%|px)? *$/i ) ) {
+				return dimStr.replace( / /g, '' );
 			}
 			return defaultStr;
 		},
 
-		gdmNormalCheckChange: function () {
-			$('#gdm-insert-drivefile').removeAttr('disabled');
-			$('#gdm-linktype-normal-options').show();
-			$('#gdm-linktype-download-options').hide();
-			$('#gdm-linktype-download-reasons').hide();
-			$('#gdm-linktype-embed-options').hide();
-			$('#gdm-linktype-embed-reasons').hide();
+		gdmNormalCheckChange: function() {
+			$( '#gdm-insert-drivefile' ).removeAttr( 'disabled' );
+			$( '#gdm-linktype-normal-options' ).show();
+			$( '#gdm-linktype-download-options' ).hide();
+			$( '#gdm-linktype-download-reasons' ).hide();
+			$( '#gdm-linktype-embed-options' ).hide();
+			$( '#gdm-linktype-embed-reasons' ).hide();
 		},
 
-		gdmDownloadCheckChange: function () {
+		gdmDownloadCheckChange: function() {
 			// Assume it is now checked
-			if ($('#gdm-linktype-download').attr('gdm-available') == 'true') {
-				$('#gdm-linktype-download-reasons').show();
-				$('#gdm-insert-drivefile').attr('disabled', 'disabled');
+			if ( $( '#gdm-linktype-download' ).attr( 'gdm-available' ) === 'true' ) {
+				$( '#gdm-linktype-download-reasons' ).show();
+				$( '#gdm-insert-drivefile' ).attr( 'disabled', 'disabled' );
 			} else {
-				$('#gdm-linktype-download-options').show();
-				$('#gdm-insert-drivefile').removeAttr('disabled');
+				$( '#gdm-linktype-download-options' ).show();
+				$( '#gdm-insert-drivefile' ).removeAttr( 'disabled' );
 			}
-			$('#gdm-linktype-normal-options').hide();
-			$('#gdm-linktype-embed-options').hide();
-			$('#gdm-linktype-embed-reasons').hide();
+			$( '#gdm-linktype-normal-options' ).hide();
+			$( '#gdm-linktype-embed-options' ).hide();
+			$( '#gdm-linktype-embed-reasons' ).hide();
 			this.hideMoreOptions();
 		},
 
-		gdmEmbedCheckChange: function () {
-			if ($('#gdm-linktype-embed').attr('gdm-available') == 'true') {
-				$('#gdm-linktype-embed-reasons').show();
-				$('#gdm-insert-drivefile').attr('disabled', 'disabled');
+		gdmEmbedCheckChange: function() {
+			if ( $( '#gdm-linktype-embed' ).attr( 'gdm-available' ) === 'true' ) {
+				$( '#gdm-linktype-embed-reasons' ).show();
+				$( '#gdm-insert-drivefile' ).attr( 'disabled', 'disabled' );
 			} else {
-				$('#gdm-linktype-embed-options').show();
-				$('#gdm-insert-drivefile').removeAttr('disabled');
+				$( '#gdm-linktype-embed-options' ).show();
+				$( '#gdm-insert-drivefile' ).removeAttr( 'disabled' );
 			}
-			$('#gdm-linktype-normal-options').hide();
-			$('#gdm-linktype-download-options').hide();
-			$('#gdm-linktype-download-reasons').hide();
+			$( '#gdm-linktype-normal-options' ).hide();
+			$( '#gdm-linktype-download-options' ).hide();
+			$( '#gdm-linktype-download-reasons' ).hide();
 		},
 
-		gdmSearchKeyPress: function (e) {
-			if (e.keyCode == 13) {
-				var search_query = $('#gdm-search-box').val();
-				this.setSearchQuery(search_query);
-				if (search_query) {
-					$('#gdm-search-clear').show();
+		gdmSearchKeyPress: function( e ) {
+			if ( e.keyCode === 13 ) {
+				var search_query = $( '#gdm-search-box' ).val();
+				this.setSearchQuery( search_query );
+				if ( search_query ) {
+					$( '#gdm-search-clear' ).show();
 				} else {
-					$('#gdm-search-clear').hide();
+					$( '#gdm-search-clear' ).hide();
 				}
 				this.makeApiCall();
 				e.preventDefault();
@@ -435,31 +414,31 @@ var gdmDriveMgr = (function ($) {
 
 		current_search_query: '',
 
-		setSearchQuery: function (str) {
+		setSearchQuery: function( str ) {
 			this.current_search_query = str
-				.replace(/\\/g, '\\\\')
-				.replace(/'/g, "\\'");
+				.replace( /\\/g, '\\\\' )
+				.replace( /'/g, '\\\'' );
 		},
 
-		resetSearchBox: function () {
+		resetSearchBox: function() {
 			this.hideMoreOptions();
-			$('#gdm-search-box').val('');
-			$('#gdm-search-clear').hide();
-			$('#gdm-search-area').css(
+			$( '#gdm-search-box' ).val( '' );
+			$( '#gdm-search-clear' ).hide();
+			$( '#gdm-search-area' ).css(
 				'visibility',
 				this.getServiceHandler().getAllowSearch()
 					? 'visible'
 					: 'hidden',
 			);
-			this.setSearchQuery('');
+			this.setSearchQuery( '' );
 		},
 
-		gdmClearSearch: function () {
+		gdmClearSearch: function() {
 			this.resetSearchBox();
 			this.makeApiCall();
 		},
 
-		gdmStartThinking: function () {
+		gdmStartThinking: function() {
 			this.gdmNothingSelected();
 			this.fileBrowser.startThinking();
 		},
@@ -469,116 +448,116 @@ var gdmDriveMgr = (function ($) {
 			'<': '&lt;',
 			'>': '&gt;',
 			'"': '&quot;',
-			"'": '&#39;',
+			'\'': '&#39;',
 			'/': '&#x2F;',
 			'[': '&#91;',
 			']': '&#93;',
 		},
 
-		escapeHTML: function (str) {
+		escapeHTML: function( str ) {
 			var self = this;
-			return String(str).replace(/[&<>\]\["'\/]/g, function (s) {
-				return self.entityMap[s];
-			});
+			return String( str ).replace( /[&<>\]\["'\/]/g, function( s ) {
+				return self.entityMap[ s ];
+			} );
 		},
 
-		showMoreOptions: function () {
-			if (!$('.gdm-more-options').is(':visible')) {
-				$('.gdm-more-options').show();
+		showMoreOptions: function() {
+			if ( ! $( '.gdm-more-options' ).is( ':visible' ) ) {
+				$( '.gdm-more-options' ).show();
 
 				// folder or calendar
-				var extraType = $('#gdm-linktype-embed-more').attr(
+				var extraType = $( '#gdm-linktype-embed-more' ).attr(
 					'data-gdm-embed-more-type',
 				);
 
-				if (extraType == 'folder') {
-					$('#gdm-more-options-folders').show();
-					$('#gdm-more-options-calendar').hide();
+				if ( extraType == 'folder' ) {
+					$( '#gdm-more-options-folders' ).show();
+					$( '#gdm-more-options-calendar' ).hide();
 				} else {
-					$('#gdm-more-options-folders').hide();
-					$('#gdm-more-options-calendar').show();
+					$( '#gdm-more-options-folders' ).hide();
+					$( '#gdm-more-options-calendar' ).show();
 				}
 
 				gdmThickDims();
 			}
 		},
 
-		hideMoreOptions: function () {
-			if ($('.gdm-more-options').is(':visible')) {
-				$('.gdm-more-options').hide();
+		hideMoreOptions: function() {
+			if ( $( '.gdm-more-options' ).is( ':visible' ) ) {
+				$( '.gdm-more-options' ).hide();
 				gdmThickDims();
 			}
 		},
 
 		// Auth stuff
-		handleFirstAuth: function (authResult) {
-			if (authResult && !authResult.error) {
-				$('#gdm-search-box').removeAttr('disabled');
+		handleFirstAuth: function( authResult ) {
+			if ( authResult && ! authResult.error ) {
+				$( '#gdm-search-box' ).removeAttr( 'disabled' );
 				this.makeApiCall();
 			} else {
 				this.fileBrowser.showAuthBox();
 			}
 		},
 
-		handleAuthClick2: function (event) {
+		handleAuthClick2: function( event ) {
 			this.fileBrowser.startThinking();
 
-			this.requestToken(false, this.handleSecondAuth);
+			this.requestToken( false, this.handleSecondAuth );
 
-			if (event) {
+			if ( event ) {
 				event.preventDefault();
 			}
 			return false;
 		},
 
-		handleSecondAuth: function (authResult) {
-			if (authResult && !authResult.error) {
-				$('#gdm-search-box').removeAttr('disabled');
+		handleSecondAuth: function( authResult ) {
+			if ( authResult && ! authResult.error ) {
+				$( '#gdm-search-box' ).removeAttr( 'disabled' );
 				this.makeApiCall();
 			} else {
-				alert('Failed to authenticate with Google');
+				alert( 'Failed to authenticate with Google' );
 				this.fileBrowser.showAuthBox();
 			}
 		},
 
-		requestToken: async function (authResult) {
+		requestToken: async function( authResult ) {
 			tokenClient.requestAccessToken();
-			this.handleSecondAuth(true);
+			this.handleSecondAuth( true );
 		},
 
-		doAuth: async function (immediate, handler) {
+		doAuth: async function( immediate, handler ) {
 			var clientid = gdm_trans.clientid;
 
-			if (clientid == '') {
+			if ( clientid === '' ) {
 				this.fileBrowser.displayMessage(
 					'<p>Please install and configure ' +
-						'<a href="http://wp-glogin.com/?utm_source=Admin%20JSmsg&utm_medium=freemium&utm_campaign=Drive" ' +
-						' target="_blank">Google Apps Login</a>' +
-						' plugin first</p><p>Version 2.0 or higher required (Free or Premium)</p>',
+					'<a href="http://wp-glogin.com/?utm_source=Admin%20JSmsg&utm_medium=freemium&utm_campaign=Drive" ' +
+					' target="_blank">Google Apps Login</a>' +
+					' plugin first</p><p>Version 2.0 or higher required (Free or Premium)</p>',
 				);
 			} else {
-				if (!gapi.client.getToken()) {
-					this.handleFirstAuth(false);
+				if ( ! gapi.client.getToken() ) {
+					this.handleFirstAuth( false );
 				} else {
-					this.handleSecondAuth(true);
+					this.handleSecondAuth( true );
 					return;
 				}
 
-				tokenClient = google.accounts.oauth2.initTokenClient({
+				tokenClient = google.accounts.oauth2.initTokenClient( {
 					client_id: clientid,
 					scope: gdm_trans.scopes,
 					callback: this.handleAuthCallback,
-				});
+				} );
 
 				this.fileBrowser.showAuthBox();
 			}
 		},
-		handleAuthCallback: async function (response) {
+		handleAuthCallback: async function( response ) {
 			gisInited = true;
-			gapi.client.setToken(response);
-			if (tokenClient) {
-				gapi.client.setToken(gapi.client.getToken());
-				gdmDriveMgr.handleFirstAuth(true);
+			gapi.client.setToken( response );
+			if ( tokenClient ) {
+				gapi.client.setToken( gapi.client.getToken() );
+				gdmDriveMgr.handleFirstAuth( true );
 			}
 		},
 		gdmJsClientLoaded: false,
@@ -587,28 +566,28 @@ var gdmDriveMgr = (function ($) {
 
 		_doneBinding: false,
 
-		init: async function (serviceType) {
-			if (!this.gdmDocReady || !this.gdmJsClientLoaded) {
+		init: async function( serviceType ) {
+			if ( ! this.gdmDocReady || ! this.gdmJsClientLoaded ) {
 				//return;
 			}
 			var self = this;
-			await new Promise((resolve) => {
-				gapi.load('client', () => {
+			await new Promise( ( resolve ) => {
+				gapi.load( 'client', () => {
 					self.gapiInit();
 					resolve();
-				});
-			});
+				} );
+			} );
 
-			if (!this._doneBinding) {
-				this.handleAuthClick2 = __bind(this.handleAuthClick2, this);
+			if ( ! this._doneBinding ) {
+				this.handleAuthClick2 = __bind( this.handleAuthClick2, this );
 				this.gdmSomethingSelected = __bind(
 					this.gdmSomethingSelected,
 					this,
 				);
-				this.gdmClearSearch = __bind(this.gdmClearSearch, this);
+				this.gdmClearSearch = __bind( this.gdmClearSearch, this );
 
-				this.handleFirstAuth = __bind(this.handleFirstAuth, this);
-				this.handleSecondAuth = __bind(this.handleSecondAuth, this);
+				this.handleFirstAuth = __bind( this.handleFirstAuth, this );
+				this.handleSecondAuth = __bind( this.handleSecondAuth, this );
 				this.gdmNormalCheckChange = __bind(
 					this.gdmNormalCheckChange,
 					this,
@@ -621,38 +600,38 @@ var gdmDriveMgr = (function ($) {
 					this.gdmEmbedCheckChange,
 					this,
 				);
-				this.gdmInsertDriveFile = __bind(this.gdmInsertDriveFile, this);
-				this.gdmSearchKeyPress = __bind(this.gdmSearchKeyPress, this);
-				this.showMoreOptions = __bind(this.showMoreOptions, this);
+				this.gdmInsertDriveFile = __bind( this.gdmInsertDriveFile, this );
+				this.gdmSearchKeyPress = __bind( this.gdmSearchKeyPress, this );
+				this.showMoreOptions = __bind( this.showMoreOptions, this );
 
 				// Click events for selected-file options
-				$('#gdm-insert-drivefile').on('click', this.gdmInsertDriveFile);
+				$( '#gdm-insert-drivefile' ).on( 'click', this.gdmInsertDriveFile );
 
-				$('#gdm-linktype-normal').on(
+				$( '#gdm-linktype-normal' ).on(
 					'change',
 					this.gdmNormalCheckChange,
 				);
-				$('#gdm-linktype-download').on(
+				$( '#gdm-linktype-download' ).on(
 					'change',
 					this.gdmDownloadCheckChange,
 				);
-				$('#gdm-linktype-embed').on('change', this.gdmEmbedCheckChange);
-				$('#gdm-search-box').on('keypress', this.gdmSearchKeyPress);
-				$('.gdm-linktype-more').on('click', this.showMoreOptions);
-				$('#gdm-search-clear').on('click', this.gdmClearSearch);
+				$( '#gdm-linktype-embed' ).on( 'change', this.gdmEmbedCheckChange );
+				$( '#gdm-search-box' ).on( 'keypress', this.gdmSearchKeyPress );
+				$( '.gdm-linktype-more' ).on( 'click', this.showMoreOptions );
+				$( '#gdm-search-clear' ).on( 'click', this.gdmClearSearch );
 
-				$('#gdm-linktype-download-options').hide();
-				$('#gdm-linktype-embed-options').hide();
-				$('#gdm-linktypes-div')
-					.find('input, label')
-					.attr('disabled', 'disabled');
+				$( '#gdm-linktype-download-options' ).hide();
+				$( '#gdm-linktype-embed-options' ).hide();
+				$( '#gdm-linktypes-div' )
+					.find( 'input, label' )
+					.attr( 'disabled', 'disabled' );
 
 				this._doneBinding = true;
 			}
 
-			this.setServiceHandler(serviceType);
+			this.setServiceHandler( serviceType );
 
-			this.fileBrowser = new this._browserRegistry[this.serviceType](
+			this.fileBrowser = new this._browserRegistry[ this.serviceType ](
 				'#gdm-file-browser-area',
 				this.getServiceHandler(),
 				{
@@ -664,88 +643,88 @@ var gdmDriveMgr = (function ($) {
 
 			this.fileBrowser.init();
 
-			// Initiate Google API auth
+			// Initiate Google API auth.
 			var self = this;
-			window.setTimeout(function () {
-				self.doAuth(true, self.handleFirstAuth);
-			}, 1);
+			window.setTimeout( function() {
+				self.doAuth( true, self.handleFirstAuth );
+			}, 1 );
 		},
 	};
 
 	return gdmDriveMgr;
-})(jQuery);
+} )( jQuery );
 
 // Invoked by Google client js file
-gdmHandleGoogleJsClientLoad = function () {
+gdmHandleGoogleJsClientLoad = function() {
 	gdmDriveMgr.gdmJsClientLoaded = true;
 	var tabname = gdmGetActiveTabName();
-	if (tabname) {
-		gdmDriveMgr.init(tabname); // Will only go ahead if document is also loaded
+	if ( tabname ) {
+		gdmDriveMgr.init( tabname ); // Will only go ahead if document is also loaded
 	}
 };
 
-gdmThickDims = function () {
+gdmThickDims = function() {
 	var tbWidth = 640,
 		tbHeight = 534 + 50;
-	var tbWindow = jQuery('#TB_window'),
-		H = jQuery(window).height(),
-		W = jQuery(window).width(),
+	var tbWindow = jQuery( '#TB_window' ),
+		H = jQuery( window ).height(),
+		W = jQuery( window ).width(),
 		w,
 		h;
 
-	var moreBox = jQuery('.gdm-more-options:visible');
-	if (moreBox.length > 0) {
+	var moreBox = jQuery( '.gdm-more-options:visible' );
+	if ( moreBox.length > 0 ) {
 		tbHeight += moreBox.height();
 	}
 
 	w = tbWidth && tbWidth < W - 90 ? tbWidth : W - 90;
 	h = tbHeight && tbHeight < H - 60 ? tbHeight : H - 60;
 
-	if (tbWindow.size()) {
-		tbWindow.width(w).height(h);
-		jQuery('#TB_ajaxContent')
-			.width(w)
-			.height(h - 31)
-			.css('padding', '0');
-		tbWindow.css({ 'margin-left': '-' + parseInt(w / 2, 10) + 'px' });
+	if ( tbWindow.size() ) {
+		tbWindow.width( w ).height( h );
+		jQuery( '#TB_ajaxContent' )
+			.width( w )
+			.height( h - 31 )
+			.css( 'padding', '0' );
+		tbWindow.css( { 'margin-left': '-' + parseInt( w / 2, 10 ) + 'px' } );
 	}
 };
 
-gdmGetActiveTabName = function () {
-	var tabid = jQuery('#gdm-tabs a.nav-tab-active').attr('id');
+gdmGetActiveTabName = function() {
+	var tabid = jQuery( '#gdm-tabs a.nav-tab-active' ).attr( 'id' );
 
-	if (tabid) {
-		return tabid.replace('-tab', '');
+	if ( tabid ) {
+		return tabid.replace( '-tab', '' );
 	}
 
 	return undefined;
 };
 
-jQuery(document).ready(function () {
+jQuery( document ).ready( function() {
 	gdmDriveMgr.gdmDocReady = true; // Tel gdmDriveMgr that document is loaded
 
-	jQuery(window).resize(function () {
+	jQuery( window ).resize( function() {
 		gdmThickDims();
-	});
+	} );
 
-	jQuery('#gdm-thickbox-trigger').click(function () {
-		window.setTimeout(function () {
+	jQuery( '#gdm-thickbox-trigger' ).click( function() {
+		window.setTimeout( function() {
 			gdmThickDims();
-		}, 1);
-	});
+		}, 1 );
+	} );
 
 	// Enable tabs
-	jQuery('#gdm-tabs')
-		.find('a')
-		.click(function () {
-			jQuery('#gdm-tabs').find('a').removeClass('nav-tab-active');
-			jQuery('.gdmtab').removeClass('active');
-			var serviceType = jQuery(this).attr('id').replace('-tab', '');
+	jQuery( '#gdm-tabs' )
+		.find( 'a' )
+		.click( function() {
+			jQuery( '#gdm-tabs' ).find( 'a' ).removeClass( 'nav-tab-active' );
+			jQuery( '.gdmtab' ).removeClass( 'active' );
+			var serviceType = jQuery( this ).attr( 'id' ).replace( '-tab', '' );
 			//jQuery('#' + id + '-section').addClass('active');
-			jQuery(this).addClass('nav-tab-active');
-			gdmDriveMgr.init(serviceType);
-		});
+			jQuery( this ).addClass( 'nav-tab-active' );
+			gdmDriveMgr.init( serviceType );
+		} );
 
 	// Will only go ahead if client lib is also loaded
-	gdmDriveMgr.init(gdmGetActiveTabName());
-});
+	gdmDriveMgr.init( gdmGetActiveTabName() );
+} );

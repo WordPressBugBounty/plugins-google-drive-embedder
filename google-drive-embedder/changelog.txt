@@ -1,0 +1,121 @@
+== Changelog ==
+
+= 5.3.0 =
+* Updated: Compatibility with WordPress 6.8.
+* Updated: Compatibility with PHP 8.
+* Fixed: A lot of plugin strings were not translatable, now the plugin can be fully translated into any language.
+* Fixed: Images from Google Drive can now again be embedded on a page. Don't forget to set the proper width and height in a shortcode or a block.
+* Fixed: A lot of code styles fixes and cleanups.
+* Fixed: In certain cases, the plugin was generating a lot of PHP Notices and Deprecation notices on PHP 8.
+
+= 5.2.6 =
+* Updated: Move to Google Identity Services.
+
+= 5.2.5 =
+* Fix: PHP Error with Shortcode.
+
+= 5.2.4 =
+* Change: Update Plugin Name.
+* Fix: Sanitize setting inputs.
+
+= 5.2.3 =
+* Added compatibility for WordPress 5.6.
+
+= 5.2.2 =
+* Updated Team Drive to Shared Drive in compliance of Google Drive updates.
+* Added compatibility for WordPress 5.4.1.
+
+= 5.2.1 =
+* Added American with Disabilities Act compliance compatibility for Google Drive Embedder folder and files icons.
+* Added compatibility for WordPress 5.3.2.
+
+= 5.2 =
+* Added compatibility for WordPress 5.3.1.
+
+= 5.1 =
+* Added compatibility for WordPress 5.2.1.
+
+= 5.0 =
+* Added compatibility for WordPress 5.0.
+
+= 4.2 =
+* Compatibility for Gutenberg Editor.
+
+= 4.1 =
+* No longer asks user for Drive permissions when they 'Login with Google'. Instead, it asks for Drive permissions only when they come to interact with the Drive functionality (clicking 'Add Google File' for example).
+
+= 4.0 =
+* Free version now supports videos, images, and forms.
+* Changed to Google Drive API v3.
+
+= 3.9.7 =
+* Some file titles were not being escaped correctly ([ and ] characters) so could cause WordPress to parse the shortcode incorrectly.
+
+= 3.9.2 =
+* Fix to match a change made by Google in the way their API works.
+
+= 3.9.1 =
+* Some users were seeing warning messages about a missing variable - now fixed.
+
+= 3.9 =
+* Updated readme to reflect new G Suite naming.
+* Some internal code refactoring bringing up to date with Premium/Enterprise versions.
+
+= 3.8.5 =
+* Improved error handling when admin inadvertently activates multiple versions of the plugin.
+
+= 3.8.2 =
+* No longer shows trashed files in Add Google File dialog box.
+
+= 3.8.1 =
+* `iframe` embeds (e.g. videos) now have `allowfullscreen` as a default attribute so the viewer can click into full screen mode.
+* Add `allowfullscreen="no"` to your shortcode to turn this off.
+* The jump in version number is to match Enterprise/Premium versions of the plugin.
+
+= 3.7 =
+* Ready for WordPress 4.4.
+* Internal changes for code readability and to prepare for 'My Drive' version.
+
+= 3.6 =
+* Due to changes in Google's Drive API some embeds (e.g. PDFs) were not always showing up. This version fixes it.
+
+= 3.3 =
+* Workaround for a Google change to iFrame permissions - PDF and other standalone docs now embed better.
+
+= 3.2 =
+* Embed as Drive is now the only option for non-native file types (e.g. PDF, Word, Excel). Avoids the old-style Google Document Viewer completely.
+
+= 3.1.1 =
+* Introduced 'Embed As Drive' option (now default) for non-native file types (e.g. PDF, Word, Excel).
+* Use Drive natively rather than sending the file via the external Google Document Viewer.
+* Non-native file types can be embedded based on permissions of the logged-in Google user - does not require Anyone with the link can view.
+
+= 3.1 =
+* Tidied up file structure, and brought documentation in line with the new Enterprise version of Google Drive Embedder.
+
+= 2.3 =
+* Provides information about Google forms availability.
+
+= 2.2 =
+* Instructions for video embed.
+
+= 2.1 =
+* Clearer error messages.
+
+= 2.0 =
+* Provides information about premium upgrade to embed certain new filetypes.
+
+= 1.4 =
+* Layout changes ready for WordPress 3.9 release.
+
+= 1.3 =
+* Extra support for non-Google file types such as PDF, Word DOC - can now be embedded inline or direct-download links.
+
+= 1.2 =
+* Added Search box functionality.
+
+= 1.1 =
+* Multisite installations now have the choice of Network Activate (so Add Drive File available on all sites), or individual sub-site activation.
+
+= 1.0 =
+* Google Drive document embedder.
